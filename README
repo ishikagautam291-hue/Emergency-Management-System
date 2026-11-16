@@ -14,8 +14,15 @@ struct Emergency e[100];
 int count = 0;
 
 
+/* MEMBER 1 - Ambulance Service */
 void ambulance()
 {
+    if (count >= 100)
+    {
+        printf("\nRecord limit reached!\n");
+        return;
+    }
+
     printf("\n--- AMBULANCE SERVICE ---\n");
 
     e[count].id = count + 1;
@@ -37,8 +44,15 @@ void ambulance()
 }
 
 
+/* MEMBER 2 - Fire Brigade Service */
 void fireBrigade()
 {
+    if (count >= 100)
+    {
+        printf("\nRecord limit reached!\n");
+        return;
+    }
+
     printf("\n--- FIRE BRIGADE SERVICE ---\n");
 
     e[count].id = count + 1;
@@ -59,8 +73,16 @@ void fireBrigade()
     printf("Emergency ID: %d\n", count);
 }
 
+
+/* MEMBER 3 - Police Service */
 void police()
 {
+    if (count >= 100)
+    {
+        printf("\nRecord limit reached!\n");
+        return;
+    }
+
     printf("\n--- POLICE SERVICE ---\n");
 
     e[count].id = count + 1;
@@ -82,8 +104,15 @@ void police()
 }
 
 
+/* MEMBER 4 - Emergency Complaint */
 void emergencyComplaint()
 {
+    if (count >= 100)
+    {
+        printf("\nRecord limit reached!\n");
+        return;
+    }
+
     printf("\n--- EMERGENCY COMPLAINT ---\n");
 
     e[count].id = count + 1;
@@ -103,6 +132,9 @@ void emergencyComplaint()
     printf("\nEmergency complaint registered successfully!\n");
     printf("Emergency ID: %d\n", count);
 }
+
+
+/* MEMBER 5 - Display All Records */
 void displayRecords()
 {
     int i;
@@ -129,7 +161,47 @@ void displayRecords()
 }
 
 
+/* Search Emergency by ID */
+void searchEmergency()
+{
+    int id, i, found = 0;
 
+    printf("\nEnter Emergency ID to search: ");
+    scanf("%d", &id);
+
+    for (i = 0; i < count; i++)
+    {
+        if (e[i].id == id)
+        {
+            printf("\nEmergency Record Found!\n");
+
+            printf("\nEmergency ID : %d", e[i].id);
+            printf("\nService      : %s", e[i].service);
+            printf("\nName         : %s", e[i].name);
+            printf("\nLocation     : %s", e[i].location);
+            printf("\nDetails      : %s\n", e[i].details);
+
+            found = 1;
+            break;
+        }
+    }
+
+    if (found == 0)
+    {
+        printf("\nEmergency ID not found!\n");
+    }
+}
+
+
+/* NEW - Count Total Emergency Requests */
+void totalEmergencies()
+{
+    printf("\n========== TOTAL EMERGENCIES ==========\n");
+    printf("Total Emergency Requests: %d\n", count);
+}
+
+
+/* MAIN FUNCTION */
 int main()
 {
     int choice;
@@ -145,7 +217,9 @@ int main()
         printf("\n3. Police Service");
         printf("\n4. Emergency Complaint");
         printf("\n5. View All Records");
-        printf("\n6. Exit");
+        printf("\n6. Search Emergency by ID");
+        printf("\n7. View Total Emergency Requests");
+        printf("\n8. Exit");
 
         printf("\n\nEnter your choice: ");
         scanf("%d", &choice);
@@ -173,6 +247,14 @@ int main()
                 break;
 
             case 6:
+                searchEmergency();
+                break;
+
+            case 7:
+                totalEmergencies();
+                break;
+
+            case 8:
                 printf("\nThank you for using Emergency Service Management System.\n");
                 return 0;
 
